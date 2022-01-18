@@ -39,4 +39,9 @@ public class PersonController {
     public void delete(@PathVariable Long id) {
         personService.delete(id);
     }
+
+    @GetMapping("/findByLastname")
+    public List<Person> showByLastName(@RequestBody Person person) {
+        return personService.findByLastName(person);
+    }
 }

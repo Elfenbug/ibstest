@@ -6,6 +6,7 @@ import ru.ibs.test.repository.PersonRepository;
 import ru.ibs.test.service.PersonService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -41,5 +42,11 @@ public class PersonServiceImpl implements PersonService {
             person.setId(id);
             personRepository.save(person);
         }
+    }
+
+    @Override
+    public List<Person> findByLastName(Person person) {
+        List<Person> persons = personRepository.findAll();
+        return persons.stream().filter(x -> x.getLastname().equals(person.getLastname())).collect(Collectors.toList());
     }
 }

@@ -14,4 +14,6 @@ public interface PersonService {
     List<Person> getAll();
 
     void update(Person person, Long id);
+
+    List<Person> findByLastName(Person person);
 }
