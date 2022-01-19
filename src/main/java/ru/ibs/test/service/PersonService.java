@@ -2,6 +2,7 @@ package ru.ibs.test.service;
 
 import ru.ibs.test.model.Person;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface PersonService {
@@ -15,5 +16,9 @@ public interface PersonService {
 
     void update(Person person, Long id);
 
-    List<Person> findByLastName(Person person);
+    List<Person> findByLastname(String lastname);
+
+    List<Person> findByBirthday(LocalDate birthday);
+
+    List<Person> findByDepartment(String department);
 }

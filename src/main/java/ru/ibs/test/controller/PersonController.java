@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.ibs.test.model.Person;
 import ru.ibs.test.service.PersonService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -40,8 +41,18 @@ public class PersonController {
         personService.delete(id);
     }
 
-    @GetMapping("/findByLastname")
-    public List<Person> showByLastName(@RequestBody Person person) {
-        return personService.findByLastName(person);
+    @PostMapping("/findByLastname")
+    public List<Person> showByLastname(@RequestBody String lastname) {
+        return personService.findByLastname(lastname);
+    }
+
+    @PostMapping("/findByBirthday")
+    public List<Person> showByBirthday(@RequestBody LocalDate birthday) {
+        return personService.findByBirthday(birthday);
+    }
+
+    @PostMapping("/findByDepartment")
+    public List<Person> showByDepartmentShortName(@RequestBody String departmentShortName) {
+        return personService.findByDepartment(departmentShortName);
     }
 }

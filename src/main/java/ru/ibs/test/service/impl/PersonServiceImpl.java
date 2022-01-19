@@ -1,12 +1,13 @@
 package ru.ibs.test.service.impl;
 
 import org.springframework.stereotype.Service;
+import ru.ibs.test.model.Department;
 import ru.ibs.test.model.Person;
 import ru.ibs.test.repository.PersonRepository;
 import ru.ibs.test.service.PersonService;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -45,8 +46,19 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<Person> findByLastName(Person person) {
-        List<Person> persons = personRepository.findAll();
-        return persons.stream().filter(x -> x.getLastname().equals(person.getLastname())).collect(Collectors.toList());
+    public List<Person> findByLastname(String lastname) {
+        return personRepository.findByLastname(lastname);
+//        List<Person> persons = personRepository.findAll();
+//        return persons.stream().filter(x -> x.getLastname().equals(person.getLastname())).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Person> findByBirthday(LocalDate birthday) {
+        return personRepository.findByBirthday(birthday);
+    }
+
+    @Override
+    public List<Person> findByDepartment(String departmentShortName) {
+        return personRepository.findByDepartment_ShortName(departmentShortName);
     }
 }
