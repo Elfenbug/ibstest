@@ -1,12 +1,13 @@
 package ru.ibs.test.service.impl;
 
 import org.springframework.stereotype.Service;
-import ru.ibs.test.model.Department;
+import org.springframework.transaction.annotation.Transactional;
 import ru.ibs.test.model.Person;
 import ru.ibs.test.repository.PersonRepository;
 import ru.ibs.test.service.PersonService;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -38,10 +39,16 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void update(Person person, Long id) {
-        if (personRepository.findById(id).orElse(null) != null) {
-            person.setId(id);
+    @Transactional
+    public void update(Person person, Long personId) {
+        if (personRepository.findPersonByPersonId(personId) != null) {
+            person.setPersonId(personId);
+            person.setVersionId(personRepository.findPersonByPersonIdAndActiveTrue(personId).getVersionId() + 1);
+            person.setDateCreated(LocalDateTime.now());
+            person.setActive(true);
             personRepository.save(person);
+            personRepository.findPersonByPersonIdAndActiveTrue(personId).setActive(false);
+
         }
     }
 
@@ -60,5 +67,15 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public List<Person> findByDepartment(String departmentShortName) {
         return personRepository.findByDepartment_ShortName(departmentShortName);
+    }
+
+    @Override
+    public Person findPersonByPersonIdAndActiveTrue(Long personId) {
+        return personRepository.findPersonByPersonIdAndActiveTrue(personId);
+    }
+
+    @Override
+    public void updateWithVersion(Person person, Long id) {
+
     }
 }
