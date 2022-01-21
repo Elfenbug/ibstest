@@ -22,8 +22,4 @@ public interface PersonService {
     List<Person> findByBirthday(LocalDate birthday);
 
     List<Person> findByDepartment(String department);
-
-    Person findPersonByPersonIdAndActiveTrue(Long personId);
-
-    void updateWithVersion(Person person, Long id);
 }
