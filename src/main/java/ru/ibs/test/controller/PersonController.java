@@ -1,6 +1,7 @@
 package ru.ibs.test.controller;
 
 import org.springframework.web.bind.annotation.*;
+import ru.ibs.test.dto.PersonDto;
 import ru.ibs.test.model.Person;
 import ru.ibs.test.service.PersonService;
 
@@ -27,13 +28,13 @@ public class PersonController {
     }
 
     @PostMapping("/create")
-    public void add(@RequestBody Person person) {
-        personService.save(person);
+    public void add(@RequestBody PersonDto personDto) {
+        personService.save(personDto);
     }
 
     @PostMapping("/update/{id}")
-    public void update(@RequestBody Person person, @PathVariable Long id) {
-        personService.update(person, id);
+    public void update(@RequestBody PersonDto personDto, @PathVariable Long id) {
+        personService.update(personDto, id);
     }
 
     @PostMapping("/delete/{id}")
