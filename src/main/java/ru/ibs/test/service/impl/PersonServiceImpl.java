@@ -75,14 +75,4 @@ public class PersonServiceImpl implements PersonService {
     public List<Person> findByDepartment(String departmentShortName) {
         return personRepository.findByDepartment_ShortName(departmentShortName);
     }
-
-    @Override
-    public Person findPersonByPersonIdAndActiveTrue(Long personId) {
-        return personRepository.findPersonByPersonIdAndActiveTrue(personId);
-    }
-
-    @Override
-    public void updateWithVersion(Person person, Long id) {
-
-    }
 }
