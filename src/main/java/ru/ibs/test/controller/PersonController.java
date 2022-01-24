@@ -11,11 +11,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/person")
 public class PersonController {
+
     private final PersonService personService;
 
     public PersonController(PersonService personService) {
         this.personService = personService;
     }
+
 
     @GetMapping("/read")
     public List<Person> showAll() {
